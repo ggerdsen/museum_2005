@@ -2,11 +2,14 @@ class Museum
 
   attr_reader :name,
               :exhibits,
-              :recommend_exhibits
+              :recommend_exhibits,
+              :admission,
+              :patrons
 
   def initialize(name)
     @name = name
     @exhibits = []
+    @patrons = []
   end
 
   def add_exhibit(exhibit)
@@ -21,6 +24,10 @@ class Museum
       end
     end
     found.flatten
+  end
+
+  def admit(patron)
+    @patrons << patron
   end
 
 end
