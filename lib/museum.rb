@@ -4,12 +4,14 @@ class Museum
               :exhibits,
               :recommend_exhibits,
               :admission,
-              :patrons
+              :patrons,
+              :patrons_by_exhibit_interest
 
   def initialize(name)
     @name = name
     @exhibits = []
     @patrons = []
+    @patron_hash = {}
   end
 
   def add_exhibit(exhibit)
@@ -28,6 +30,30 @@ class Museum
 
   def admit(patron)
     @patrons << patron
+  end
+
+  def patrons_by_exhibit_interest
+    @patron_hash = @exhibits.each do |exhibit|
+      exhibit.name
+      @patrons.find_all do |patron|
+        patron.interests.each do |interest|
+          exhibit.name == interest
+          patron
+        end
+      end
+    end
+  end
+
+  def ticket_lottery_contestants(exhibit)
+
+  end
+
+  def draw_lottery_winner(exhibit)
+
+  end
+
+  def announce_lottery_winner(exhibit)
+
   end
 
 end

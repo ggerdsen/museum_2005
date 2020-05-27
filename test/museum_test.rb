@@ -3,6 +3,7 @@ require 'minitest/pride'
 require './lib/exhibit'
 require './lib/patron'
 require './lib/museum'
+require 'mocha/minitest'
 require 'pry'
 
 class MuseumTest < Minitest::Test
@@ -17,6 +18,8 @@ class MuseumTest < Minitest::Test
     @patron_1.add_interest("Gems and Minerals")
     @patron_2 = Patron.new("Sally", 20)
     @patron_2.add_interest("IMAX")
+    @patron_3 = Patron.new("Johnny", 5)
+    @patron_3.add_interest("Dead Sea Scrolls")
   end
 
   def test_it_exists
@@ -73,6 +76,16 @@ class MuseumTest < Minitest::Test
     @dmns.admit(@patron_2)
     @dmns.admit(@patron_3)
     assert_equal [@patron_1, @patron_2, @patron_3], @dmns.patrons
+  end
+
+  def test_it_can_show_patrons_by_exhibit_interest
+    @dmns.add_exhibit(@gems_and_minerals)
+    @dmns.add_exhibit(@dead_sea_scrolls)
+    @dmns.add_exhibit(@imax)
+    @dmns.admit(@patron_1)
+    @dmns.admit(@patron_2)
+    @dmns.admit(@patron_3)
+    @dmns.patrons_by_exhibit_interest
   end
 
 end
